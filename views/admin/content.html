@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>后台管理系统</title>
+
+	<link rel="stylesheet" href="/public/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/public/css/admin.css">
+	
+	<script src="/public/js/jquery.js"></script>
+	<script src="/public/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="/admin">后台管理</a>
+	    </div>
+
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav">
+	        <li><a href="/admin/user">用户管理</a></li>
+	        <li class="dropdown">
+	          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">分类管理<span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="/admin/category">分类首页</a></li>
+	            <li><a href="/admin/category/add">添加分类</a></li>
+	          </ul>
+	        </li>
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">文章管理 <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="/admin/content">文章列表</a></li>
+	            <li><a href="/admin/content/add">添加文章</a></li>
+	          </ul>
+	        </li>
+	        <li><a href="#">评论</a></li>
+	      </ul>
+	      <ul class="nav navbar-nav navbar-right">
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{userInfo.username}} <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="#">退出</a></li>
+	          </ul>
+	        </li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+
+	<div>
+		<p><a href="/admin">管理首页</a>/用户列表</p>
+		<table class="table_list table table-hover table-striped">
+			<tr>
+				<th>ID</th>
+				<th>分类</th>
+				<th>标题</th>
+				<th>作者</th>
+				<th>时间</th>
+				<th>访问量</th>
+				<th>操作</th>
+			</tr>
+			{% for content in contents %}
+			<tr>
+				<td>{{content._id.toString()}}</td>
+				<td>{{content.category.name}}</td>
+				<td>{{content.title}}</td>
+				<td>{{content.user.username}}</td>
+				<td>{{content.addTime|date('Y年m月d日 H:i:s',-8*60)}}</td>
+				<!-- ymdhis 年月日时分秒 -->
+				<td>{{content.views}}</td>
+				<td><a href="/admin/content/edit?id={{content._id.toString()}}">编辑</a>|<a href="/admin/content/delete?id={{content._id.toString()}}">删除</a></td>
+			</tr>
+			{% endfor %}
+		</table>
+
+		<nav>
+		  <ul class="pager">
+		    <li class="previous"><a href="/admin/content?page={{page-1}}">上一页</a></li>
+		    <li>一共{{count}}条数据，每页{{limit}}条数据，一共{{pageMax}}页，当前是第{{page}}页</li>
+		    <li class="next"><a href="/admin/content?page={{page+1}}">下一页</a></li>
+		  </ul>
+		</nav>
+	</div>
+
+
+<script src="/public/js/admin.js"></script>
+</body>
+</html>

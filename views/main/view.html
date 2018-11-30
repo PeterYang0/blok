@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/public/css/index.css">
+	<script src="/public/js/jquery.js"></script>
+	<script src="/public/js/jquery.cookie.js"></script>
+	<script src="/public/js/hogan.js"></script>
+	<title>首页</title>
+</head>
+<body>
+	<header id="header"></header>
+	<nav id="nav">
+		{% if category == '' %}
+		<a class="active" href="/">首页</a>
+		{%else%}
+		<a href="/">首页</a>
+		{%endif%}
+		
+		{%for cate in categories%}
+
+			{% if category == cate._id.toString() %}
+			<a class="active" href="/?category={{cate._id.toString()}}">{{cate.name}}</a>
+			{%else%}
+			<a href="/?category={{cate._id.toString()}}">{{cate.name}}</a>
+			{%endif%}
+
+		{%endfor%}
+	</nav>
+	
+	<div class="container content">
+		<div class="left_content">
+			<div class="artical">
+				<div class="listBox">
+	        		<h1>{{content.title}}</h1>
+	        		<p class="colDefault">
+			            作者：<span class="colInfo">{{content.user.username}}</span> -
+			            时间：<span class="colInfo">{{content.addTime|date('Y年m月d日')}}</span> -
+			            阅读：<span class="colInfo">{{content.views}}</span> -
+			            评论：<span class="colInfo">{{content.comments.length}}</span>
+			        </p>
+			        <dfn>
+			            {{content.content}}
+			        </dfn>
+	    		</div>
+			    <div class="listBox message">
+			        <p class="textLeft"><strong>评论</strong> <span class="em">一共有 <em id="messageCount">{{content.comments.length}}</em> 条评论</span></p>
+
+			        {% if userInfo._id %}
+			        <p class="textLeft clear">
+			        	<textarea data-id='{{content.id}}' name="messageContent" id="messageContent" cols="60" rows="3" ></textarea>
+			            <!-- <input type="hidden" id="contentId" value="{{content.id}}"> -->
+			            <button id="messageBtn">提交</button>
+			        </p>
+			        {%else%}
+			        <p class="bgDanger">你还没有登录，请先登录！</p>
+			        {%endif%}
+
+			        <div class="messageList">
+			        	
+			        </div>
+					<p id="return">返回上一页</p>
+			    </div>
+
+			</div>
+		</div>
+		<div class="right_content">
+			<div class="box" id="user_box">
+				<div class="title">用户信息</div>
+				<div class="body">
+					<p>您好！<span class="username"></span>&nbsp;<a class="link" id="logOut">退出</a></p>
+					{% if userInfo.isAdmin %}
+					<p class="admin_msg">您是管理员，<a href="/admin" target="_blank">进入管理系统</a></p>
+					{% else %}
+					{% endif %}
+				</div>
+			</div>
+			<div class="box" id="login_box">
+				<div class="title">登录</div>
+				<div class="body">
+					<p class="err_tips"></p>
+					<div class="form_line">
+						<label for="login_username">用户名：</label>
+						<input type="text" placeholder="请输入用户名" id="login_username">
+					</div>
+					<div class="form_line">
+						<label for="login_password">密码：</label>
+						<input type="password" placeholder="请输入密码" id="login_password">
+					</div>
+				</div>
+				<div class="btn login_btn">登录</div>
+				<p class="login_msg">没有账号?<a class='link' id='toRegister'>马上注册</a></p>
+			</div>
+			<div class="box" id="register_box">
+				<div class="title">注册</div>
+				<div class="body">
+					<p class="err_tips"></p>
+					<div class="form_line">
+						<label for="register_username">用户名：</label>
+						<input type="text" placeholder="请输入用户名" id="register_username" autocomplete="off"/>
+					</div>
+					<div class="form_line">
+						<label for="register_password">密码：</label>
+						<input type="password" placeholder="请输入密码" id="register_password" autocomplete="off"/>
+					</div>
+					<div class="form_line">
+						<label for="register_password_s">确认密码：</label>
+						<input type="password" placeholder="请输入密码" id="register_password_s" autocomplete="off"/>
+					</div>
+				</div>
+				<div class="btn register_btn">注册</div>
+				<p class="login_msg">已有账号?<a class='link' id='toLogin'>马上登录</a></p>
+			</div>
+		</div>
+	</div>
+
+	<script src="/public/js/index.js"></script>
+</body>
+</html>

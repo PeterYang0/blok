@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/public/css/index.css">
+	<script src="/public/js/jquery.js"></script>
+	<script src="/public/js/jquery.cookie.js"></script>
+	<script src="/public/js/hogan.js"></script>
+	<title>首页</title>
+</head>
+<body>
+	<header id="header"></header>
+	<nav id="nav">
+		{% if category == '' %}
+		<a class="active" href="/">首页</a>
+		{%else%}
+		<a href="/">首页</a>
+		{%endif%}
+		
+		{%for cate in categories%}
+
+			{% if category == cate._id.toString() %}
+			<a class="active" href="/?category={{cate._id.toString()}}">{{cate.name}}</a>
+			{%else%}
+			<a href="/?category={{cate._id.toString()}}">{{cate.name}}</a>
+			{%endif%}
+
+		{%endfor%}
+	</nav>
+	
+	<div class="container content">
+		<div class="left_content">
+			<div class="artical">
+				{%for content in contents%}
+			    <div class="listBox">
+			        <h1>{{content.title}}</h1>
+			        <p class="colDefault">
+			            作者：<span class="colInfo">{{content.user.username}}</span> -
+			            时间：<span class="colInfo">{{content.addTime|date('Y年m月d日')}}</span> -
+			            阅读：<span class="colInfo">{{content.views}}</span> -
+			            评论：<span class="colInfo">{{content.comments.length}}</span>
+			        </p>
+			        <dfn><p>{{content.description}}</p></dfn>
+			        <div class="function"><a href="/view?contentid={{content._id.toString()}}">阅读全文</a></div>
+			    </div>
+			    {%endfor%}
+			    <div class="pager">
+			        <ul class="clear">
+			            <li class="previous">
+			                {%if page <= 1%}
+			                <span>没有上一页了</span>
+			                {%else%}
+			                <a href="/?category={{category}}&page={{page-1}}">上一页</a>
+			                {%endif%}
+			            </li>
+			            {%if pageMax > 0%}
+			            <li>
+			                <strong>{{page}} / {{pageMax}}</strong>
+			            </li>
+			            {%else%}
+			            <li>
+			                当前分类无内容
+			            </li>
+			            {%endif%}
+			            <li class="next">
+			                {%if page >= pageMax%}
+			                <span>没有下一页了</span>
+			                {%else%}
+			                <a href="/?category={{category}}&page={{page+1}}">下一页</a>
+			                {%endif%}
+			            </li>
+			        </ul>
+    			</div>
+			</div>
+		</div>
+		<div class="right_content">
+			<div class="box" id="user_box">
+				<div class="title">用户信息</div>
+				<div class="body">
+					<p>您好！<span class="username"></span>&nbsp;<a class="link" id="logOut">退出</a></p>
+					{% if userInfo.isAdmin %}
+					<p class="admin_msg">您是管理员，<a href="/admin" target="_blank">进入管理系统</a></p>
+					{% else %}
+					{% endif %}
+				</div>
+			</div>
+			<div class="box" id="login_box">
+				<div class="title">登录</div>
+				<div class="body">
+					<p class="err_tips"></p>
+					<div class="form_line">
+						<label for="login_username">用户名：</label>
+						<input type="text" placeholder="请输入用户名" id="login_username">
+					</div>
+					<div class="form_line">
+						<label for="login_password">密码：</label>
+						<input type="password" placeholder="请输入密码" id="login_password">
+					</div>
+				</div>
+				<div class="btn login_btn">登录</div>
+				<p class="login_msg">没有账号?<a class='link' id='toRegister'>马上注册</a></p>
+			</div>
+			<div class="box" id="register_box">
+				<div class="title">注册</div>
+				<div class="body">
+					<p class="err_tips"></p>
+					<div class="form_line">
+						<label for="register_username">用户名：</label>
+						<input type="text" placeholder="请输入用户名" id="register_username" autocomplete="off"/>
+					</div>
+					<div class="form_line">
+						<label for="register_password">密码：</label>
+						<input type="password" placeholder="请输入密码" id="register_password" autocomplete="off"/>
+					</div>
+					<div class="form_line">
+						<label for="register_password_s">确认密码：</label>
+						<input type="password" placeholder="请输入密码" id="register_password_s" autocomplete="off"/>
+					</div>
+				</div>
+				<div class="btn register_btn">注册</div>
+				<p class="login_msg">已有账号?<a class='link' id='toLogin'>马上登录</a></p>
+			</div>
+		</div>
+	</div>
+
+	<script src="/public/js/index.js"></script>
+</body>
+</html>

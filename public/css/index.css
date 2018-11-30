@@ -1,0 +1,273 @@
+/*
+* @Author: 羊驼
+* @Date:   2018-10-14 08:55:04
+* @Last Modified by:   羊驼
+* @Last Modified time: 2018-11-30 17:30:33
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+	background: #e0e0e0;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+.btn{
+	width: 60px;
+	height: 30px;
+	background: #93d8e4;
+	line-height: 30px;
+	text-align: center;
+}
+.link{
+	color: #c60023;
+	cursor: pointer;
+}
+.err_tips{
+	display: none;
+	border: 1px solid red;
+	background: #999;
+	color: #c60023;
+	text-align: center;
+	padding: 5px 0;
+	width: 186px;
+	margin-left: 84px;
+	margin-bottom: 5px;
+}
+#header{
+	width: 100%;
+	height: 180px;
+	background-image: url('/public/imgs/header.jpg');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-position: center center;
+}
+.container{
+	width: 960px;
+	margin: 0 auto;
+}
+#nav{
+	width: 100%;
+	height: 45px;
+	text-align: center;
+	background: #fff;
+	margin-bottom: 20px;
+}
+#nav a{
+	display: inline-block;
+	text-decoration: none;
+	height: 45px;
+	text-align: center;
+	line-height: 45px;
+	color: #000;
+	font-size: 15px;
+	padding: 0 20px;
+	margin: 0 5px;
+}
+#nav a.active{
+	border-bottom: 2px solid #c60023;
+}
+.content .left_content{
+	width: 630px;
+	float: left;
+}
+/* 内容中心 */
+.colInfo{
+	color:red;
+}
+.content .left_content .artical{
+	width: 100%;
+	margin-bottom: 50px;
+}
+.content .left_content .artical .listBox{
+	margin-bottom: 20px;
+	background: #fff;
+	padding: 35px 20px 20px;
+}
+.content .left_content .artical .listBox h1{
+	font-size: 25px;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 15px;
+}
+.content .left_content .artical .listBox .colDefault{
+	font-size: 15px;
+	text-align: center;
+	margin-bottom: 15px;
+}
+.content .left_content .artical .listBox dfn p{
+	margin-bottom: 15px;
+}
+.content .left_content .artical .listBox .function a{
+	background-color: #A2E0E9;
+	display: block;
+	width: 90px;
+	height: 35px;
+	border-radius: 3px;
+	color: #000;
+	text-align: center;
+	line-height: 35px;
+	text-decoration: none;
+	font-size: 15px;
+}
+/* 底部分页 */
+.content .left_content .artical .pager{
+	background: #fff;
+	width: 100%;
+	height: 60px;
+}
+.content .left_content .artical .clear{
+	display: flex;
+	justify-content: space-around;
+}
+.content .left_content .artical .clear li{
+	line-height: 60px;
+}
+#return{
+	padding: 10px;
+	text-align: center;
+	cursor: pointer;
+	margin-top: 30px;
+}
+/* 内容中心结束 */
+.content .right_content{
+	width: 300px;
+	float: right;
+}
+.content .right_content .box{
+	width: 100%;
+	background: #fff;
+	margin-bottom: 20px;
+	padding: 10px 20px 20px;
+}
+.content .right_content .body p {
+	margin-top: 10px;
+}
+.content .right_content .title{
+	width: 100%;
+	height: 30px;
+	border-bottom:1px solid #999;
+	margin-bottom: 10px;
+	line-height: 30px;
+	font-weight: bold;
+	font-size: 18px;
+}
+.content .right_content .body label{
+	display: inline-block;
+	width: 80px;
+	height: 25px;
+	text-align: right;
+}
+.content .right_content .body input{
+	width: 180px;
+	height: 25px;
+}
+.content .right_content .body .form_line{
+	margin-bottom: 5px;
+}
+.content .right_content .login_btn,
+.content .right_content .register_btn{
+	width: 186px;
+	margin-left: 84px;
+	cursor: pointer;
+	margin-bottom: 10px;
+}
+.content .right_content .login_msg{
+	text-align: right;
+}
+.content .right_content #user_box{
+	display: none;
+}
+.content .right_content #user_box .admin_msg{
+	/* display: none; */
+}
+.content .right_content #login_box{
+	display: block;
+}
+.content .right_content #register_box{
+	display: none;
+}
+/* 评论框 */
+.content .left_content .artical .textLeft{
+	margin-bottom: 30px;
+}
+.content .left_content .artical .textLeft strong{
+	font-weight: bold;
+}
+.content .left_content .artical .textLeft .em{
+	float: right;
+}
+.content .left_content .artical #messageContent{
+	resize: none;
+}
+.content .left_content .artical #messageBtn{
+	position: relative;
+	left: -8px;
+	top: 1px;
+	width: 85px;
+	height: 67px;
+	background: #1881C1;
+	border: none;
+	padding: 0;
+	color: #fff;
+	font-size: 18px;
+	cursor: pointer;
+}
+.content .left_content .artical .bgDanger{
+	background: #FF7043;
+	height: 30px;
+	font-size: 15px;
+	line-height: 30px;
+	text-align: center;
+}
+/* 评论 */
+.content .left_content .artical .messageList .msg{
+	width: 100%;
+	margin-bottom: 30px;
+}
+.content .left_content .artical .messageList .msg_line{
+	margin-bottom: 15px;
+	overflow: hidden;
+}
+.content .left_content .artical .messageList .msg_user{
+	float: left;
+}
+.content .left_content .artical .messageList .msg_time{
+	float: right;
+}
